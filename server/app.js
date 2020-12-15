@@ -29,6 +29,7 @@ app.use(bodyParser.json())
 app.use(express.json())
 
 // routes
+// get data
 app.get('/', (req, res) => {
     Student.find()
     .exec()
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
     })
 })
 
+// submit data
 app.post('/students', (req, res) => {
     const student = new Student({
         _id: new mongoose.Types.ObjectId,
@@ -60,6 +62,7 @@ app.post('/students', (req, res) => {
     })
 })
 
+// delete data
 app.delete('/students/:id', (req, res)=>{
     const id = req.params.id
     Student.remove({_id:id}, (err, result)=>{
@@ -74,6 +77,7 @@ app.delete('/students/:id', (req, res)=>{
     })
 })
 
+// update data
 app.put('/students/:id', (req, res)=> {
     
     Student.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators:true})
